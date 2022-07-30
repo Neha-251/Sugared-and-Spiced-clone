@@ -15,7 +15,6 @@ const Signup = () => {
         name: '',
         email: '',
     })
-    console.log('userData', userData)
 
     const registerUser = (e) => {
         e.preventDefault();
@@ -24,10 +23,8 @@ const Signup = () => {
     }
 
     const handleInp = (e) => {
-        // console.log('e', e, name)
 
         let {name, value} = e.target
-        console.log('name', name)
 
         setUserData({
             ...userData,

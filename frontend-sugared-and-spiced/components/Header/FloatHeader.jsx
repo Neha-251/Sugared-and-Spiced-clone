@@ -13,7 +13,7 @@ export const FloatHeader = ({ display }) => {
                     <div className="font-serif p-3 text-grey text-center tracking-wider text-sm">
                     <p>REAR 10334 82 AVE, EDMONTON, AB T6E rZ8  (780) 244-2253</p>
                 </div>
-                    <nav className="flex fixed top-8 left-10 w-full justify-between z-10">
+                    <nav className="flex fixed top-5 left-10 w-full justify-between z-10">
                         <div className="p-2 cursor-pointer bg-slate-50 opacity-80">
                             <Image src="/images/logo.png" height="80" width="150" />
                         </div>

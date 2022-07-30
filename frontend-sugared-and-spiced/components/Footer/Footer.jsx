@@ -21,7 +21,6 @@ export const Footer = () => {
 
         const headerObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
-                console.log('entry', entry)
                 if (entry.isIntersecting) {
                     setFootDisplay(false)
                 }
