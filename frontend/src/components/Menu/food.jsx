@@ -4,7 +4,8 @@ import { GiChickenLeg } from 'react-icons/gi';
 import { debounce } from "lodash";
 import { Rating } from "./Rating";
 import { useLocation, useNavigate } from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Modal } from "../Modal";
 
 export const Food = () => {
 
@@ -68,10 +69,10 @@ export const Food = () => {
     const observer = useRef();
 
     const handlePage = useCallback(debounce(() => {
-        
-            setCurrPage(prev => prev + 1)
-            setLoading(true)
-        
+        setLoading(true)
+
+        setCurrPage(prev => prev + 1)
+
     }, 5000), [loading])
 
     useEffect(() => {
@@ -130,7 +131,6 @@ export const Food = () => {
 
     return (
         <div ref={scrollRef} className='flex  w-11/12 mx-auto overflow-y-hidden'>
-                {/* {loading && <Modal msg={'loading'}/>} */}
             <div className="w-72 p-4 fixed mt-28 shadow-xl shadow-gray-800 h-96">
 
                 <p className="text-center text-2xl mb-4">Menu</p>
@@ -154,41 +154,47 @@ export const Food = () => {
                 <div className='text-center'><button className='h-10 border-2 bg-red-500 text-white hover:bg-white hover:border-2 hover:border-red-500 hover:text-red-500 uppercase bg-#c65234 px-5 py-1'>Clear Filter</button></div>
 
             </div>
-            <div className="grid-cols-2 grid ml-80 overflow-y-hidden text-center">
+
+            {
+                loading && <Modal />
+            }
+
+
+            <div className="grid-cols-2 grid ml-80 overflow-y-hidden">
                 {
                     data.map((el, idx) => {
                         if (data.length === idx + 1) {
                             return (
                                 <Link to={`/products/${el._id}`}>
-                                <div ref={lastUserRef} key={el._id} className='p-10 mb-5 mx-8 hover:shadow-xl cursor-pointer'>
-                                    <div className="w-84 h-64 rounded-md overflow-hidden">
-                                        <img src={el.image} className='object-cover rounded-md h-full w-full hover:w-96 hover:ease-in ease-out hover:h-72 duration-500 delay-75' alt='img' />
+                                    <div ref={lastUserRef} key={el._id} className='p-10 mb-5 mx-8 hover:shadow-xl cursor-pointer'>
+                                        <div className="w-84 h-64 rounded-md overflow-hidden">
+                                            <img src={el.image} className='object-cover rounded-md h-full w-full hover:w-96 hover:ease-in ease-out hover:h-72 duration-500 delay-75' alt='img' />
 
+                                        </div>
+                                        <div >
+                                            <p className='text-xl my-2'>{el.name}</p>
+                                            <p className='text-xl'>{el.price} Rs</p>
+                                            <p className={el.description === "Veg" ? 'flex m-1 text-xl py-2 text-green-600' : 'flex m-1 text-2xl py-2 text-yellow-700'}> {el.description === 'Veg' ? <ImLeaf /> : <GiChickenLeg />}</p>
+                                            <div className="flex"><Rating rating={el.rating} /><p className="-mt-1">{el.rating}</p></div>
+                                        </div>
                                     </div>
-                                    <div >
-                                        <p className='text-xl my-2'>{el.name}</p>
-                                        <p className='text-xl'>{el.price} Rs</p>
-                                        <p className={el.description === "Veg" ? 'flex m-1 text-xl py-2 text-green-600' : 'flex m-1 text-2xl py-2 text-yellow-700'}> {el.description === 'Veg' ? <ImLeaf /> : <GiChickenLeg />}</p>
-                                        <div className="flex"><Rating rating={el.rating} /><p className="-mt-1">{el.rating}</p></div>
-                                    </div>
-                                </div>
                                 </Link>
                             )
                         } else {
                             return (
                                 <Link to={`/products/${el._id}`}>
-                                <div key={el._id} className='p-10 mb-5 mx-8 hover:shadow-xl cursor-pointer'>
-                                    <div className="w-84 h-64 rounded-md overflow-hidden">
-                                        <img src={el.image} className='object-cover rounded-md h-full w-full hover:w-96 hover:ease-in ease-out hover:h-72 duration-500 delay-75' alt='img' />
-                                    </div>
+                                    <div key={el._id} className='p-10 mb-5 mx-8 hover:shadow-xl cursor-pointer'>
+                                        <div className="w-84 h-64 rounded-md overflow-hidden">
+                                            <img src={el.image} className='object-cover rounded-md h-full w-full hover:w-96 hover:ease-in ease-out hover:h-72 duration-500 delay-75' alt='img' />
+                                        </div>
 
-                                    <div >
-                                        <p className='text-xl my-2'>{el.name}</p>
-                                        <p className='text-xl'>{el.price} Rs</p>
-                                        <p className={el.description === "Veg" ? 'flex m-1 text-xl py-2 text-green-600' : 'flex m-1 text-2xl py-2 text-yellow-700'}> {el.description === 'Veg' ? <ImLeaf /> : <GiChickenLeg />}</p>
-                                        <div className="flex"><Rating rating={el.rating} /><p className="-mt-1">{el.rating}</p></div>
+                                        <div >
+                                            <p className='text-xl my-2'>{el.name}</p>
+                                            <p className='text-xl'>{el.price} Rs</p>
+                                            <p className={el.description === "Veg" ? 'flex m-1 text-xl py-2 text-green-600' : 'flex m-1 text-2xl py-2 text-yellow-700'}> {el.description === 'Veg' ? <ImLeaf /> : <GiChickenLeg />}</p>
+                                            <div className="flex"><Rating rating={el.rating} /><p className="-mt-1">{el.rating}</p></div>
+                                        </div>
                                     </div>
-                                </div>
                                 </Link>
 
                             )
@@ -197,7 +203,7 @@ export const Food = () => {
 
                     })
                 }
-            
+
 
 
             </div>

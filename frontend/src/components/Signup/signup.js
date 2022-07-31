@@ -7,8 +7,11 @@ import axios from 'axios';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { FloatHeader } from '../Header/FloatHeader';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+
+    const navigate = useNavigate()
 
     const [userId, setUserId] = useState('')
     const [userData, setUserData] = useState({
@@ -18,29 +21,28 @@ const Signup = () => {
     })
 
     const [seePassword, setSeePassword] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const registerUser = (e) => {
+        setLoading(true);
         e.preventDefault();
 
         if(termLeft) {
             axios.post("https://sugared-spiced-clone.herokuapp.com/users/signup", userData).
-            then(res => alert(res.data)).catch(err => alert(err.message))
+            then(res => {alert(res.data); setLoading(false); termLeft(false)}).catch(err => alert(err.message))
         } else {
             axios.post("https://sugared-spiced-clone.herokuapp.com/users/login", userData).
-            then(res => setUserId(res.data.user._id)).catch(err => alert(err.message))
+            then(res => {setUserId(res.data.user._id); setLoading(false); navigate('/products')}).catch(err => alert(err.message))
         }
-        
     }
 
     const handleInp = (e) => {
-
         let { name, value } = e.target
 
         setUserData({
             ...userData,
             [name]: value
         })
-
     }
 
     const handleSeePsd = () => {
