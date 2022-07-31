@@ -13,7 +13,6 @@ const Menu = () => {
       <FloatHeader display={true} />
       <div>
         
-        <div id='welcomeText' className='text-5xl text-center py-20'>Menu</div>
 
         <Food />
 
