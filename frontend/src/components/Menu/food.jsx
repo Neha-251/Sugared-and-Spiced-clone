@@ -4,7 +4,6 @@ import { GiChickenLeg } from 'react-icons/gi';
 import { debounce } from "lodash";
 import { Rating } from "./Rating";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Modal } from "../Modal";
 
 
 export const Food = () => {
