@@ -4,7 +4,7 @@ import { GiChickenLeg } from 'react-icons/gi';
 import { debounce } from "lodash";
 import { Rating } from "./Rating";
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import {Link} from 'react-router-dom';
 
 export const Food = () => {
 
@@ -159,6 +159,7 @@ export const Food = () => {
                     data.map((el, idx) => {
                         if (data.length === idx + 1) {
                             return (
+                                <Link to={`/products/${el._id}`}>
                                 <div ref={lastUserRef} key={el._id} className='p-10 mb-5 mx-8 hover:shadow-xl cursor-pointer'>
                                     <div className="w-84 h-64 rounded-md overflow-hidden">
                                         <img src={el.image} className='object-cover rounded-md h-full w-full hover:w-96 hover:ease-in ease-out hover:h-72 duration-500 delay-75' alt='img' />
@@ -171,9 +172,11 @@ export const Food = () => {
                                         <div className="flex"><Rating rating={el.rating} /><p className="-mt-1">{el.rating}</p></div>
                                     </div>
                                 </div>
+                                </Link>
                             )
                         } else {
                             return (
+                                <Link to={`/products/${el._id}`}>
                                 <div key={el._id} className='p-10 mb-5 mx-8 hover:shadow-xl cursor-pointer'>
                                     <div className="w-84 h-64 rounded-md overflow-hidden">
                                         <img src={el.image} className='object-cover rounded-md h-full w-full hover:w-96 hover:ease-in ease-out hover:h-72 duration-500 delay-75' alt='img' />
@@ -186,6 +189,8 @@ export const Food = () => {
                                         <div className="flex"><Rating rating={el.rating} /><p className="-mt-1">{el.rating}</p></div>
                                     </div>
                                 </div>
+                                </Link>
+
                             )
                         }
 

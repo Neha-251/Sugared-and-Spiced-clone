@@ -1,4 +1,5 @@
 import { BsTwitter, BsInstagram } from 'react-icons/bs'
+import {Link} from 'react-router-dom';
 
 export const FixedFooter = ({ display }) => {
     return (
@@ -19,9 +20,9 @@ export const FixedFooter = ({ display }) => {
 
                     <div className='flex justify-evenly m-0 w-3/12 align-middle p-0 relative'>
                         <button className='h-10 border-0 outline-none hover:text-red'>Events & Specials</button>
-                        <button className='h-10 border-2 bg-red-500 text-white hover:bg-white hover:border-2 hover:border-red-500 hover:text-red-500 uppercase bg-#c65234 px-5 py-1'>
+                        <Link to='/signup'> <button className='h-10 border-2 bg-red-500 text-white hover:bg-white hover:border-2 hover:border-red-500 hover:text-red-500 uppercase bg-#c65234 px-5 py-1'>
                             Email Signup
-                        </button>
+                        </button></Link>
                     </div>
                 </div> : null
         }</>
