@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useEffect } from 'react';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
+import { userContext } from '../Context/userContext';
 import { Footer } from '../Footer/Footer';
 import { FloatHeader } from '../Header/FloatHeader';
 import { Modal } from '../Modal';
@@ -9,6 +10,9 @@ import { Modal } from '../Modal';
 
 
 export const SingleProduct = () => {
+    const navigate = useNavigate();
+
+    const {userId} = useContext(userContext)
 
     const {id} = useParams();
     const [loading, setLoading] = useState(true);
@@ -20,14 +24,24 @@ export const SingleProduct = () => {
         .then(res => {setData(res.data.productdata); setLoading(false)}).catch(err => console.log(err))
     }, [])
 
-    const [food, setFood] = useState({
-        name : data.name,
-        image: data.image,
-        price: data.price,
-        qty: qty
-    });
+    
     const handleAddtoCart = () => {
-
+        if(userId !== ''){
+            let food = {
+                name : data.name,
+                image: data.image,
+                description: data.description,
+                price: data.price,
+                qty: qty
+            }
+            
+            axios.patch(`https://sugared-spiced-clone.herokuapp.com/carts/edit/products?userId=${userId}`, food)
+            .then(res=> res.data && alert("Food Added to Cart"))
+        }
+        else {
+            navigate('/signup')
+        }
+        
     }
 
 

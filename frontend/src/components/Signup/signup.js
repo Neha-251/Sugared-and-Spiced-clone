@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai'
 // import Popup from 'reactjs-popup';
 // import 'reactjs-popup/dist/index.css';
@@ -8,12 +8,14 @@ import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { FloatHeader } from '../Header/FloatHeader';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { userContext } from '../Context/userContext';
 
 const Signup = () => {
 
     const navigate = useNavigate()
 
-    const [userId, setUserId] = useState('')
+    const {setUserId} = useContext(userContext);
+    
     const [userData, setUserData] = useState({
         name: '',
         email: '',
@@ -29,10 +31,10 @@ const Signup = () => {
 
         if(termLeft) {
             axios.post("https://sugared-spiced-clone.herokuapp.com/users/signup", userData).
-            then(res => {alert(res.data); setLoading(false); termLeft(false)}).catch(err => alert(err.message))
+            then(res => { setLoading(false); setTermLeft(false)}).catch()
         } else {
             axios.post("https://sugared-spiced-clone.herokuapp.com/users/login", userData).
-            then(res => {setUserId(res.data.user._id); setLoading(false); navigate('/products')}).catch(err => alert(err.message))
+            then(res => {console.log(res.data.user._id) ;setUserId(res.data.user._id); localStorage.setItem("userId", res.data.user._id); setLoading(false); navigate('/products')}).catch()
         }
     }
 
