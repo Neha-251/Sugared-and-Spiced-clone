@@ -20,14 +20,16 @@ export const CartSideBar = () => {
         })
         setSubTotal(total);
         
-    }, [refreshCart, cartData])
+    }, [refreshCart, cartData, loading])
 
     useEffect(()=> {
         setTax(Math.ceil((subTotal*5)/100))
 
-        subTotal > 0 && subTotal < 300 && setDelivery(120)
-        subTotal > 0 && subTotal < 500 && setDelivery(80)
         subTotal > 0 && subTotal < 1000 && subTotal > 500 && setDelivery(50)
+        subTotal > 0 && subTotal < 500 && setDelivery(80)
+        subTotal > 0 && subTotal < 300 && setDelivery(120)
+        subTotal === 0 && subTotal < 300 && setDelivery(0)
+
         
     }, [subTotal])
 
@@ -36,7 +38,7 @@ export const CartSideBar = () => {
         setTotal(tempTotal);
         setRefreshCart(false)
         setLoading(false)
-    }, [delivery])
+    }, [delivery, subTotal])
    
 
     return (
