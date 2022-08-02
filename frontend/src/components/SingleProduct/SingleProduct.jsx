@@ -12,10 +12,9 @@ import { Modal } from '../Modal';
 
 export const SingleProduct = () => {
 
-    const { cartData, setCartData } = useContext(userContext)
+    const { cartData, setCartData, loading, setLoading } = useContext(userContext)
 
     const { id } = useParams();
-    const [loading, setLoading] = useState(true);
     const [prodQty, setProdQty] = useState(1);
     const [isData, setIsData] = useState(false);
     const [data, setData] = useState({})

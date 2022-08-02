@@ -10,8 +10,8 @@ export const UserContextProvider = ({ children }) => {
     const [userId, setUserId] = useState('');
     const [isCart, setIsCart] = useState(true);
     const [cartData, setCartData] = useState([]);
-    console.log('cartData', cartData)
     const [refreshCart, setRefreshCart] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         let id = localStorage.getItem("userId")
@@ -22,6 +22,7 @@ export const UserContextProvider = ({ children }) => {
 
    
     return <userContext.Provider value={{
-        userId, setUserId, cartData, setCartData, refreshCart, setRefreshCart
+        userId, setUserId, cartData, setCartData, loading, setLoading,
+         refreshCart, setRefreshCart
     }}>{children}</userContext.Provider>
 }
