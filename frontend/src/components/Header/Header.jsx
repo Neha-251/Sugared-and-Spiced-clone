@@ -1,9 +1,13 @@
 import logo from '../images/logo.png';
 import {Link} from 'react-router-dom'
 import {FaOpencart} from 'react-icons/fa';
+import { useContext } from 'react';
+import { userContext } from '../Context/userContext';
 
 
 export const Header = ({ display }) => {
+
+    const { cartData } = useContext(userContext)
 
 
     return (
@@ -23,7 +27,7 @@ export const Header = ({ display }) => {
 
                         <nav className="flex absolute cursor-pointer top-20 left-10 w-full justify-between z-20">
                             <div className="p-2">
-                                <img src={logo} height="80" width="150" />
+                                <img src={logo} height="80" width="150" alt='img' />
                             </div>
 
                             <div className="flex pt-2 w-1/2 text-white mr-20 justify-evenly cursor-pointer">
@@ -33,7 +37,7 @@ export const Header = ({ display }) => {
                                 <p className="cursor-pointer  hover:text-teal-100">Hours & Location</p>
                                 <p className="cursor-pointer  hover:text-teal-100"> Gift Cards</p>
                                 <p className="cursor-pointer  hover:text-teal-100"><Link to='/products'>Menu</Link></p>
-                                <Link to='/cart'><p className="cursor-pointer hover:text-teal-100 flex gap-1">Cart <FaOpencart className='mt-1 text-lg  text-red-600'/></p></Link>
+                                <Link to='/cart'><div className="cursor-pointer hover:text-teal-100 flex gap-1">Cart <FaOpencart className='mt-2 text-lg  text-red-600' /><div className='bg-transparent -ml-4 -mt-2 text-red-500'>{cartData.length}</div></div></Link>
                             </div>
                         </nav>
 
