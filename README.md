@@ -31,7 +31,8 @@
 
 ## Frontend :
 
-### Intersection Observer Api for nice UI,
+### Intersection Observer Api, animations and hover effects for nice UI,
+### Debounce for better performance
 ### Search Food in Menu,
 ### Filter by price,
 ### Filter by Veg or Non veg,
