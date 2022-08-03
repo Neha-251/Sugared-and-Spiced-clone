@@ -15,8 +15,6 @@ export const FoodQty = ({ data }) => {
 
     const refreshCart = () => {
         setRefreshCart(true)
-        setLoading(true);
-        console.log('loadingiiii', loading)
     }
 
     useEffect(()=> {
@@ -34,13 +32,17 @@ export const FoodQty = ({ data }) => {
     }, [prodQty])
 
     const qtyInc = () => {
-        prodQty < 50 && setProdQty(prev => prev + 1)
-        refreshCart()
+        if(prodQty < 20){
+            setProdQty(prev => prev + 1)
+            refreshCart()
+        } 
     }
 
     const qtyDec = () => {
-        prodQty > 1 && setProdQty(prev => prev - 1)
-        refreshCart()
+        if(prodQty > 1) {
+            setProdQty(prev => prev - 1)
+            refreshCart()
+        } 
     }
 
     return (
